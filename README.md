@@ -10,6 +10,10 @@ command to run module:
 
     python -m dictionary_search
 
+dependencies: requests
+
+    pip install requests
+
 Notes:
 Handles multiple words by throwing a note to input single word
 
