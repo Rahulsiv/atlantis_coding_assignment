@@ -5,19 +5,22 @@ import json
 
 
 def register_driver(request):
-    request_body = json.loads(request.body)
+    try:
+        request_body = json.loads(request.body)
+    except json.decoder.JSONDecodeError:
+        return HttpResponse({
+            'error': True,
+        })
     serializer = DriverSerializer(data=request_body)
     if serializer.is_valid():
         serializer.save()
         return HttpResponse({
-            'success': True,
-            'data': serializer.data
+            'success': True
         })
     else:
-        return HttpResponse({
-            'success': False,
-            'error': serializer.errors
-        })
+        return HttpResponse(
+            serializer.errors
+        )
 
 
 def update_location(request, driver_id):
@@ -25,7 +28,12 @@ def update_location(request, driver_id):
     :param request: json.dumbs ->  {"latitude" : 34.0023, "longitude": -43.0000}
     :param driver_id: driver id
     """
-    request_body = json.loads(request.body)
+    try:
+        request_body = json.loads(request.body)
+    except json.decoder.JSONDecodeError:
+        return HttpResponse({
+            'error': True,
+        })
     try:
         driver = Driver.objects.get(id=driver_id)
     except Driver.DoesNotExist:
@@ -40,14 +48,18 @@ def update_location(request, driver_id):
             'success': True
         })
     else:
-        return HttpResponse({
-            'success': False,
-            'error': serializer.errors
-        })
+        return HttpResponse(
+            serializer.errors
+        )
 
 
 def get_nearest_drivers(request):
-    request_body = json.loads(request.body)
+    try:
+        request_body = json.loads(request.body)
+    except json.decoder.JSONDecodeError:
+        return HttpResponse({
+            'error': True,
+        })
     dist_class = DistanceClass()
     lat = request_body.get('latitude')
     lon = request_body.get('longitude')
