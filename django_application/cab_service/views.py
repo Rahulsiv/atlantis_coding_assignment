@@ -1,5 +1,4 @@
 from django.http import HttpResponse
-from rest_framework.views import status
 from .models import Driver, DriverDoestNotExist, DriverSerializer
 from .services import DistanceClass
 import json
@@ -13,12 +12,12 @@ def register_driver(request):
         return HttpResponse({
             'success': True,
             'data': serializer.data
-        }, status=status.HTTP_201_CREATED)
+        })
     else:
         return HttpResponse({
             'success': False,
             'error': serializer.errors
-        }, status=status.HTTP_400_BAD_REQUEST)
+        })
 
 
 def update_location(request, driver_id):
@@ -39,12 +38,12 @@ def update_location(request, driver_id):
         driver.save()
         return HttpResponse({
             'success': True
-        }, status=status.HTTP_200_OK)
+        })
     else:
         return HttpResponse({
             'success': False,
             'error': serializer.errors
-        }, status=status.HTTP_400_BAD_REQUEST)
+        })
 
 
 def get_nearest_drivers(request):
@@ -63,4 +62,4 @@ def get_nearest_drivers(request):
     nearby_drivers = Driver.objects.filter(id__in=nearby_driver_ids)
     serializer = DriverSerializer(nearby_drivers, many=True)
     response = serializer.data
-    return HttpResponse(response, status=status.HTTP_200_OK)
+    return HttpResponse(response)

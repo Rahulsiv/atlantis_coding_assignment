@@ -18,6 +18,7 @@ from django.urls import path, include
 
 urlpatterns = [
     path('api/', include('cab_service.urls')),
-    path('csv/', include('csv_splitter.urls')),
+    path('serviceA/', include('serviceA.urls')),
+    path('serviceB/', include('serviceB.urls')),
     path('admin/', admin.site.urls),
 ]

@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cab_service.apps.CabServiceConfig',
-    'csv_splitter.apps.CsvSplitterConfig',
+    'serviceA.apps.ServiceAConfig',
+    'serviceB.apps.ServiceBConfig',
 ]
 
 MIDDLEWARE = [
