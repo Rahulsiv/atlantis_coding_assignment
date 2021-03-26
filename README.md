@@ -43,3 +43,9 @@ command to run module:
 Notes:
 Code setup for Linux system. Lists available networks in order of signal strength. \
 And enbles user to join the network after enter password
+
+
+# SET 2
+
+## Assignment 2 and Assignment 3
+path: django_application/
